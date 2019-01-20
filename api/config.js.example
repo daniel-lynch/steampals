@@ -1,0 +1,2 @@
+//https://steamcommunity.com/dev/apikey
+module.exports = "STEAM API KEY HERE";
