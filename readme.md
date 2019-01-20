@@ -15,6 +15,8 @@ Example:
     exports.cookieKeys = ["This is a Secret key"];
 
 Enter your Steam Api Key in exports.steamApiKey = "";
+Example:
+    exports.steamApiKey = "SteamApiKeyHere";
 A Steam Api Key can obtained here https://steamcommunity.com/dev/apikey
 
 node app.js
