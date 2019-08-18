@@ -1,0 +1,30 @@
+#signinDiv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+body {
+    font-family: 'Fjalla One', sans-serif;
+
+    background: 
+    /* top, transparent red, faked with gradient */ 
+    linear-gradient(
+      rgba(16, 20, 31, 0.93), 
+      rgba(16, 20, 31, 0.93)
+    ),
+    /* bottom, image */
+    url(/img/galaxy.jpg);
+    height: 100%;
+    background-size: cover;
+}
+
+a,
+p,
+h1,
+h2 {
+    color: #ecf2ff;
+    font-weight: 400;
+}

@@ -1,0 +1,37 @@
+.carbonads {
+    position: static;
+    display: block;
+    max-width: 400px;
+    padding: 15px 15px 15px 160px;
+    margin: 2rem 0;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.bgdark {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.carbonads a {
+    color: #333;
+    text-decoration: none;
+}
+.personanamegreen {
+    color: rgb(89, 197, 79);
+    text-decoration: none;
+}
+.carbon-img {
+    float: left;
+    margin-left: -145px;
+}
+.carbon-poweredby {
+    display: block;
+    color: rgb(218, 218, 218)!important;
+    margin-bottom: 8px !important;
+}
+
+*, ::after, ::before {
+    box-sizing: content-box;
+}
+
