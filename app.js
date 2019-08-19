@@ -1,7 +1,7 @@
 const express = require('express'),
     passport = require('passport'),
     api = require('./api/api.js'),
-    port = process.env.PORT || 4000;
+    port = process.env.PORT || 80;
 let app = express();
 
 //configs
