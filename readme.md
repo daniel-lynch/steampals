@@ -3,7 +3,7 @@
 ## Get Started
 
 ```
-git clone ssh://git@git.loukihost.com:1022/dlynch/steampals.io.git
+git clone https://github.com/daniel-lynch/steampals.git
 cd steampals.io
 npm install
 cp config/config.js.example config/config.js
