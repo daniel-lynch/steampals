@@ -1,4 +1,5 @@
 module.exports = (app, api) => {
+
     app.get('/', function (req, res) {
         if (req.user) {
             api.getFriends(req.user.steamId, (friends) => {
@@ -11,20 +12,8 @@ module.exports = (app, api) => {
         }
     });
 
-    app.get('/yikes', function (req, res) {
-        if (req.user) {
-            api.getFriends(req.user.steamId, (friends) => {
-                api.getRealName(req.user.steamId, (user) => {
-                    res.render('yikes', { user, friends });
-                });
-            });
-        } else {
-            res.redirect('/auth/login')
-        }
-    });
 
-
-    app.post('/yikes', async function (req, res) {
+    app.post('/', async function (req, res) {
         if (req.user) {
             if (req.body.friends) {
                 const friends = req.body.friends

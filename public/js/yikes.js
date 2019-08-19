@@ -10,7 +10,7 @@ function getFriendsGames() {
     friendsNames = friendsNames.join(", ")
     console.log(friends);
     $.ajax({
-        url: "/yikes",
+        url: "/",
         type: "POST",
         contentType: 'application/json',
         data: JSON.stringify({ friends }),
