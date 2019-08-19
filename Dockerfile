@@ -1,9 +1,12 @@
 FROM node:10-alpine
 
-COPY . /app
+WORKDIR /app
 
-RUN cd /app && \
-    npm install
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
 
 EXPOSE 80
 
