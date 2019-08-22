@@ -8,7 +8,6 @@ function getFriendsGames() {
         friendsNames.push($(this).attr("friendname"))
     });
     friendsNames = friendsNames.join(", ")
-    console.log(friends);
     $.ajax({
         url: "/",
         type: "POST",
@@ -16,7 +15,6 @@ function getFriendsGames() {
         data: JSON.stringify({ friends }),
         success: function (results) {
             $(".container").append(`<p>Comparing with ${friendsNames}</p>`)
-            console.log(results);
             $("#compareRow").remove();
             results.map((game) => {
                 $(".container").append(`${game}<br>`);
