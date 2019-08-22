@@ -21,6 +21,11 @@ function getFriendsGames() {
             results.map((game) => {
                 $(".container").append(`${game}<br>`);
             })
+        },
+        error: function () {
+            $(".container").append(`<p>Comparing with ${friendsNames}</p>`)
+            $("#compareRow").remove();
+            $(".container").append("No games found.")
         }
     })
 }
