@@ -3,8 +3,8 @@ module.exports = (app, passport) => {
     const SteamStrategy = new OpenIDStrategy({
         providerURL: 'http://steamcommunity.com/openid',
         stateless: true,
-        returnURL: 'http://steampals.io/auth/openid/return',
-        realm: 'http://steampals.io/',
+        returnURL: process.env.URL || 'https://steampals.io/auth/openid/return',
+        realm: process.env.REALM || 'http://steampals.io/',
     },
         function (identifier, done) {
             process.nextTick(function () {

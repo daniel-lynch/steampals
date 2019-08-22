@@ -7,6 +7,7 @@ git clone https://github.com/daniel-lynch/steampals.git
 cd steampals.io
 npm install
 cp config/config.js.example config/config.js
+touch .env
 
 Edit config/config.js
 
@@ -19,5 +20,12 @@ Example:
     exports.steamApiKey = "SteamApiKeyHere";
 A Steam Api Key can obtained here https://steamcommunity.com/dev/apikey
 
+Edit .env
+
+URL="http://localhost/auth/openid/return"
+REALM="http://localhost/"
+
 node app.js
+
+Go to http://localhost
 ```

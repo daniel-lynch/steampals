@@ -39,7 +39,12 @@ module.exports = (app, api) => {
                         sameGames.push(count)
                     }
                 }
-                res.send(sameGames)
+                if (sameGames !== undefined && sameGames.length != 0){
+                    console.log(sameGames.length)
+                    res.send(sameGames)
+                } else {
+                    res.status(404).send()
+                }
             }
         } else {
             res.redirect('/auth/login')

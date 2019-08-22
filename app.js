@@ -5,6 +5,7 @@ const express = require('express'),
 let app = express();
 
 //configs
+require('dotenv').config()
 require('./config/express.js')(app, express);
 require('./config/passport.js')(app, passport);
 
