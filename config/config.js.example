@@ -1,4 +1,0 @@
-// Key/Keys for cookieSession
-exports.cookieKeys = [""];
-// Steam Api Key
-exports.steamApiKey = "";
