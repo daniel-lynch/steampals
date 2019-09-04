@@ -1,18 +1,41 @@
-const express = require('express'),
-    passport = require('passport'),
-    api = require('./api/api.js'),
-    port = process.env.PORT || 80;
-let app = express();
+/**
+ * Application Entry Point
+ * @author Anthony Loukinas <anthony.loukinas@redhat.com>
+ */
 
-//configs
-require('dotenv').config()
-require('./config/express.js')(app, express);
-require('./config/passport.js')(app, passport);
+/**
+ * Module dependencies
+ */
+if(!process.env.NODE_ENV){
+    process.env.NODE_ENV = 'development';
+}
+const config    = require('./config/config'),
+    chalk       = require('chalk');
 
-//routes
-require('./routes/auth')(app, passport);
-require('./routes/index')(app, api);
+require('dotenv').config(); // TODO remove this
 
+// Init the express application
+const app = require('./config/express')();
 
-app.listen(port);
-console.log(`Listening on port ${port}`);
+// Launch application on port 3000
+app.listen(config.port, () => console.log(
+    chalk.bgGreen(`[steampals]`),
+    chalk.bgRed(`[server]`),
+    chalk.underline(`listening on *:${config.port}`)
+));
+
+// Logging initialization
+console.log('-=========-');
+console.log(chalk.green('Environment:\t\t\t' + process.env.NODE_ENV));
+console.log(chalk.green('Port:\t\t\t\t' + config.port));
+console.log(chalk.green('Database:\t\t\t' + null));
+if (process.env.NODE_ENV === 'secure') {
+    console.log(chalk.green('HTTPs:\t\t\t\ton'));
+}
+console.log('-=========-');
+
+process.on('uncaughtException', function (err) {
+    console.error((new Date()).toUTCString() + ' uncaughtException:', err.message);
+    console.error(err.stack);
+    process.exit(1);
+});
