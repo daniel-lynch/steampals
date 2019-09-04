@@ -21,18 +21,23 @@ const steam = new SteamAPI('386959403F7D32C15C5937873D2BFBFA');
  * @param res - Express Response
  */
 exports.getIndex = (req, res) => {
+  if (req.user) res.redirect('/compare');
+  else res.render('Index', { nav_dir: "index"});
+}
+
+exports.getCompare = (req, res) => {
   if (req.user) {
     api.getFriends(req.user.steamId, (friends) => {
         api.getRealName(req.user.steamId, (user) => {
-            res.render('index', { user, friends });
+            res.render('Compare', { user, friends });
         });
     });
   } else {
-      res.redirect('/auth/login')
+      res.redirect('/');
   }
 };
 
-exports.postIndex = async (req, res) => {
+exports.postCompare = async (req, res) => {
   if (req.user) {
     if (req.body.friends) {
         const friends = req.body.friends;
@@ -43,7 +48,8 @@ exports.postIndex = async (req, res) => {
 
         let gameCounts = {};
         // This is where we need to figure out looping over Game Objects @daniel.lynch
-        let userGames = await steam.getUserOwnedGames(req.user.steamId);
+        await steam.getUserOwnedGames(req.user.steamId);
+        let userGames = await api.getGames(req.user.steamId);
 
         userGames = [...new Set(userGames)];
         comparedGames = comparedGames.concat(userGames); // Array[Array[], Array[]]

@@ -36,7 +36,7 @@ module.exports = function(app) {
     .get(requireLogin, Auth.getReturn);
 
   app.route('/auth/logout')
-    .post(Auth.postLogout);
+    .get(Auth.getLogout);
 
   app.route('/auth/login')
     .get(Auth.getLogin);

@@ -17,7 +17,8 @@ module.exports = function(app) {
   app.route('/')
     .get(Index.getIndex);
 
-  app.route('/')
-    .post(Index.postIndex);
+  app.route('/compare')
+    .get(Index.getCompare)
+    .post(Index.postCompare);
 
 }
