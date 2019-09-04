@@ -4,7 +4,7 @@ module.exports = (app, passport) => {
         providerURL: 'http://steamcommunity.com/openid',
         stateless: true,
         returnURL: process.env.URL || 'https://steampals.io/auth/openid/return',
-        realm: process.env.REALM || 'http://steampals.io/',
+        realm: process.env.REALM || 'https://steampals.io/',
     },
         function (identifier, done) {
             process.nextTick(function () {
