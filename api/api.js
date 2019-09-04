@@ -1,6 +1,6 @@
 // Request library for api requests
 const request = require("request");
-const apikey = require("../config/config").steamApiKey;
+const apikey = require("../config/env/steamCredentials").steamApiKey;
 // my steam id for testing
 const mysteamid = "76561198041498404";
 
