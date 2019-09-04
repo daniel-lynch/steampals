@@ -19,9 +19,9 @@ exports.getReturn = (req, res) => {
   }
 }
 
-exports.postLogout = (req, res) => {
+exports.getLogout = (req, res) => {
   req.logout();
-  res.redirect(request.get('Referer') || '/');
+  res.redirect(req.get('Referer') || '/');
 }
 
 exports.getLogin = (req, res) => {
