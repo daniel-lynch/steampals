@@ -9,6 +9,10 @@
  */
 const api = require('../api/api');
 
+// TODO clean this up
+const SteamAPI = require('steamapi');
+const steam = new SteamAPI('386959403F7D32C15C5937873D2BFBFA');
+
 /**
  * Handles logic for "/".
  * Currently we are handling routing to your default route based
@@ -31,26 +35,40 @@ exports.getIndex = (req, res) => {
 exports.postIndex = async (req, res) => {
   if (req.user) {
     if (req.body.friends) {
-        const friends = req.body.friends
-        const totalUsers = friends.length + 1
+        const friends = req.body.friends;
+        const totalUsers = friends.length + 1;
+
         let sameGames = [];
-        let compGames = [];
-        let counts = {};
-        let userGames = await api.getGames(req.user.steamId);
+        let comparedGames = [];
+
+        let gameCounts = {};
+        // This is where we need to figure out looping over Game Objects @daniel.lynch
+        let userGames = await steam.getUserOwnedGames(req.user.steamId);
+
         userGames = [...new Set(userGames)];
-        compGames = compGames.concat(userGames);
-        for (friend of friends) {
-            let friendGames = await api.getGames(friend)
+        comparedGames = comparedGames.concat(userGames); // Array[Array[], Array[]]
+
+        for (friendUuid of friends) {
+            let friendGames = await api.getGames(friendUuid)
             // Need to make friendGames a set because they can have multiple of the same game.
             let set = [...new Set(friendGames)];
-            compGames = compGames.concat(set)
+            // Games["Elder Scrolls", "Elder Scrolls", "Counter Strike", "Batallion 1944"]
+            comparedGames = comparedGames.concat(set)
         }
-        for (let i = 0; i < compGames.length; i++) {
-            let num = compGames[i];
-            counts[num] = counts[num] ? counts[num] + 1 : 1;
+
+        // for (Games["Elder Scrolls", "Elder Scrolls", "Counter Strike", "Batallion 1944"])
+        // {
+        //     "Elder Scrolls": 2,
+        //     "Counter Strike": 1,
+        //     "Batallion 1944": 1
+        // }
+        for (let i = 0; i < comparedGames.length; i++) {
+            let gameArrayIndex = comparedGames[i];
+            gameCounts[gameArrayIndex] = gameCounts[gameArrayIndex] ? gameCounts[gameArrayIndex] + 1 : 1;
         }
-        for (count in counts) {
-            if (counts[count] === totalUsers) {
+
+        for (count in gameCounts) {
+            if (gameCounts[count] === totalUsers) {
                 sameGames.push(count)
             }
         }
