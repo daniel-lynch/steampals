@@ -10,34 +10,12 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import './index.css'
 
-class Board extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            
-        }
-        this.items = this.state.cart.map((item, key) =>
-            <li key={item.id}>{item.name}</li>
-        );
-      }
-
-    render(){
-        return (
-            <div>
-                {this.items}
-            </div>
-        )
-    }
-}
-
 
 // TODO make friends nav component
 
 const App = () => (
     <Container>
         <Nav />
-        <Board />
         <Row>
             <Col md={4}>
                 <h2 className="friendsNav">Select Your friends</h2>
