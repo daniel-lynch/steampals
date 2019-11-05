@@ -30,12 +30,14 @@ p {
 .card {
     border: 0;
     margin: 4px;
+    width: '22rem';
 }
 .card:hover {
     margin: 0 !important;
     border: #949494;
     border-width: 4px;
     border-style: solid;
+    width: '22rem';
 }
 
 .friendsCard {
