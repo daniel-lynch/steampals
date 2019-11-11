@@ -9,19 +9,19 @@ p {
 
 /* Profile stuff */
 
-.onlineName,.awayName {
-    color: #66c1e5;
-}
-
 .online,.away {
     color: #4b90ab;
+}
+
+.online.friendName,.away.friendName {
+    color: #66c1e5;
 }
 
 .inGame {
     color: #90c056;
 }
 
-.inGameName {
+.inGame.friendName {
     color: #d1eab4;
 }
 
@@ -33,6 +33,14 @@ p {
     width: '22rem';
 }
 .card:hover {
+    margin: 0 !important;
+    border: #7c7b94;
+    border-width: 4px;
+    border-style: solid;
+    width: '22rem';
+}
+
+.friendSelected {
     margin: 0 !important;
     border: #949494;
     border-width: 4px;

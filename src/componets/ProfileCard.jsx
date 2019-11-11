@@ -7,16 +7,26 @@ import '../index.css';
 
 
 class ProfileCard extends Component {
+    constructor(props) {
+        super(props);
+        this.handleFriendSelect = this.handleFriendSelect.bind(this);
+      }
+
+      handleFriendSelect(e) {
+        this.props.onhandleFriendSelect(this.props.options.key);
+      }
+
     render(){
+        let {pic, type, name, status, card} = this.props.options;
         return (
             <Col md={4} style={{marginTop: '20px'}}>
-                <Card>
-                    <Card.Body className="friendsCard">
+                <Card className={card} onClick={this.handleFriendSelect}>
+                    <Card.Body>
                         <Row>
-                            <Col xs="auto"><img alt="" src={this.props.pic} /></Col>
+                            <Col xs="auto"><img alt="" src={pic} /></Col>
                             <Col xs="auto">
-                                <p className={this.props.type + "Name"}>{this.props.name}</p>
-                                <p className={this.props.type}>{this.props.status}</p>
+                                <p className={`${type} friendName`}>{name}</p>
+                                <p className={type}>{status}</p>
                             </Col>
                         </Row>
                     </Card.Body>

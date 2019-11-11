@@ -32,7 +32,7 @@ class Board extends React.Component {
                     type: "inGame",
                 },
                 {
-                    id:3,
+                    id: 3,
                     pic: "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/9d/9db9a42b946084eb4446a94ec0342f163dff6f0e_medium.jpg",
                     name: "imfearless",
                     status: "Away",
@@ -59,10 +59,12 @@ class Board extends React.Component {
                     status: "Away",
                     type: "away"
                 },
-            ]
+            ],
+            selectedFriends: []
         }
 
         this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+        this.handleFriendSelect = this.handleFriendSelect.bind(this);
 
       }
 
@@ -72,16 +74,55 @@ class Board extends React.Component {
         });
     }
 
+    handleFriendSelect(id) {
+        let selectedFriends = this.state.selectedFriends
+        console.log(selectedFriends)
+        if (selectedFriends.indexOf(id) !== -1){
+            console.log(selectedFriends.indexOf(id))
+            selectedFriends.splice(selectedFriends.indexOf(id), 1)
+            console.log(selectedFriends)
+            this.setState({
+                selectedFriends: selectedFriends
+            });
+        }
+        else {
+            this.setState({
+                selectedFriends: [...selectedFriends, id]
+            });
+        }
+    }
+
     render(){
         const filterText = this.state.filterText.toLowerCase();
+        const selectedFriends = this.state.selectedFriends;
         const rows = [];
 
         this.state.friends.forEach((friend) => {
             if (friend.name.toLowerCase().indexOf(filterText) === -1){
-                console.log(filterText)
+                // Text box debug
+                // console.log(filterText)
                 return;
             }
-            rows.push(<ProfileCard pic={friend.pic} name={friend.name} status={friend.status} type={friend.type} key={friend.id} />)
+
+            let options = {
+                pic: friend.pic,
+                name: friend.name,
+                status: friend.status,
+                type: friend.type,
+                key: friend.id,
+                card: "friendsCard"
+            }
+
+            if (selectedFriends.indexOf(friend.id) !== -1){
+                options.card += " friendSelected"
+            }
+            else {
+                options.card = "friendsCard"
+            }
+
+            // console.log(friend.id, selectedFriends)
+            // console.log(friend.id in selectedFriends)
+            rows.push(<ProfileCard options={options} key={friend.id} onhandleFriendSelect={this.handleFriendSelect} />)
         })
 
         return (
