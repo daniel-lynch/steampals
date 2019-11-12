@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col"
+import Col from "react-bootstrap/Col";
 import ProfileCard from './componets/ProfileCard';
-import Nav from './componets/Nav'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import './index.css'
+import Nav from './componets/Nav';
+import Button from 'react-bootstrap/Button';
+import SearchBar from './componets/SearchBar';
+import './index.css';
 
 class Board extends React.Component {
 
@@ -139,27 +139,6 @@ class Board extends React.Component {
                 {rows}
             </Row>
         )
-    }
-}
-
-class SearchBar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
-      }
-
-      handleFilterTextChange(e) {
-        this.props.onFilterTextChange(e.target.value);
-      }
-
-      render() {
-        return (
-        <Form.Control
-            type="text"
-            placeholder="Search..."
-            value={this.props.filterText}
-            onChange={this.handleFilterTextChange} />
-        );
     }
 }
 
