@@ -49,10 +49,17 @@ p {
 }
 
 .friendsCard {
+    cursor: pointer;
     background-color: #1f2127;
 }
 
-
+/* Game stuff */
+.col-md-4:hover .gameCard {
+    filter: url("data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\'&gt;&lt;filter id=\'grayscale\'&gt;&lt;feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale"); /* Firefox 10+, Firefox on Android */
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+    opacity: .5;
+}
 
 
 /* Navbar stuff */
@@ -70,4 +77,55 @@ p {
 .friendsNav {
     margin-bottom: 0px !important;
     color: #ffffff
+}
+
+
+
+
+.arrow-down {
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid rgb(0, 0, 0);
+  }
+
+.middleTop {
+    transition: .3s ease;
+    opacity: 0;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+.middleBottom {
+    transition: .3s ease;
+    opacity: 0;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}  
+
+.col-md-4:hover .middleTop, .col-md-4:hover .middleBottom {
+    opacity: 1;
+}
+
+.text {
+    color: white;
+    font-size: 25px;
+    padding: 0px 32px;
+}
+
+.text svg {
+    vertical-align: 0 !important;
+}
+.underline {
+    cursor: pointer;
+    text-decoration: underline;
 }

@@ -8,6 +8,8 @@ import ProfileCard from './componets/ProfileCard';
 import Nav from './componets/Nav';
 import Button from 'react-bootstrap/Button';
 import SearchBar from './componets/SearchBar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import './index.css';
 
 class Board extends React.Component {
@@ -142,16 +144,50 @@ class Board extends React.Component {
     }
 }
 
+class GameScreen extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+    render() {
+        return(
+            <Row>
+                <Col md={4}>
+                    <img className="w-100 h-auto gameCard" alt="Arma 3" src="http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg" />
+                </Col>
+                <Col md={4}>
+                    <img className="w-100 h-auto gameCard" alt="Call of Duty Black Ops 3" src="http://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg" />
+                </Col>
+                <Col md={4}>
+                    <img className="w-100 h-auto gameCard" alt="Payday 2" src="http://cdn.akamai.steamstatic.com/steam/apps/218620/header.jpg" />
+                    <div class="middleTop">
+                        <div class="text">Payday 2</div>
+                    </div>
+                    <div class="middleBottom">
+                        <div class="text underline">More Info</div>
+                        <div class="text"><FontAwesomeIcon icon={faCaretDown} /></div>
+                    </div>
+                </Col>
+            </Row>
+        );
+    }
+}
 
 // TODO make friends nav component
+
+// const App = () => (
+//     <Container>
+//         <Nav />
+//         <Board />
+//     </Container>
+//   );
 
 const App = () => (
     <Container>
         <Nav />
-        <Board />
+        <GameScreen />
     </Container>
-  );
-
+);
 
 // ========================================
 
