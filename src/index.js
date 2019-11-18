@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from "react-bootstrap/Container";
@@ -8,6 +8,7 @@ import ProfileCard from './componets/ProfileCard';
 import Nav from './componets/Nav';
 import Button from 'react-bootstrap/Button';
 import SearchBar from './componets/SearchBar';
+import Collapse from 'react-bootstrap/Collapse'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import './index.css';
@@ -151,26 +152,47 @@ class GameScreen extends React.Component {
     }
     render() {
         return(
-            <Row>
-                <Col md={4}>
-                    <img className="w-100 h-auto gameCard" alt="Arma 3" src="http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg" />
-                </Col>
-                <Col md={4}>
-                    <img className="w-100 h-auto gameCard" alt="Call of Duty Black Ops 3" src="http://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg" />
-                </Col>
-                <Col md={4}>
-                    <img className="w-100 h-auto gameCard" alt="Payday 2" src="http://cdn.akamai.steamstatic.com/steam/apps/218620/header.jpg" />
-                    <div class="middleTop">
-                        <div class="text">Payday 2</div>
-                    </div>
-                    <div class="middleBottom">
-                        <div class="text underline">More Info</div>
-                        <div class="text"><FontAwesomeIcon icon={faCaretDown} /></div>
-                    </div>
-                </Col>
-            </Row>
+            <div>
+                <h1 className="compGameText">Comparing with: Sharpyaddict</h1>
+                <Row>
+                    <Col md={6} lg={4}>
+                        <img className="w-100 h-auto gameCard" alt="Arma 3" src="http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg" />
+                    </Col>
+                    <Col md={6} lg={4}>
+                        <img className="w-100 h-auto gameCard" alt="Call of Duty Black Ops 3" src="http://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg" />
+                    </Col>
+                    <GameCard />
+                </Row>
+            </div>
         );
     }
+}
+
+function GameCard(props) {
+    const [open, setOpen] = useState(false);
+    return(
+        <Col md={6} lg={4} onClick={() => setOpen(!open)}>
+            <div className="position-relative">
+                <img className="w-100 h-auto gameCard" alt="Payday 2" src="http://cdn.akamai.steamstatic.com/steam/apps/218620/header.jpg" />
+                <div class="middleTop">
+                    <div class="text">Payday 2</div>
+                </div>
+                <div class="middleBottom">
+                    <div class="text underline">More Info</div>
+                    <div class="text"><FontAwesomeIcon icon={faCaretDown} /></div>
+                </div>
+            </div>
+            <Collapse in={open}>
+                <div className="gameInfo">
+                <p>
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+                    terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
+                    labore wes anderson cred nesciunt sapiente ea proident.
+                </p>
+                </div>
+            </Collapse>
+        </Col>
+    )
 }
 
 // TODO make friends nav component
