@@ -154,7 +154,7 @@ class GameScreen extends React.Component {
         return(
             <div>
                 <h1 className="compGameText">Comparing with: Sharpyaddict</h1>
-                <Row>
+                {/* <Row>
                     <Col md={6} lg={4}>
                         <img className="w-100 h-auto gameCard" alt="Arma 3" src="http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg" />
                     </Col>
@@ -162,6 +162,30 @@ class GameScreen extends React.Component {
                         <img className="w-100 h-auto gameCard" alt="Call of Duty Black Ops 3" src="http://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg" />
                     </Col>
                     <GameCard />
+                    <Col md={6} lg={4}>
+                        <img className="w-100 h-auto gameCard" alt="Arma 3" src="http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg" />
+                    </Col>
+                    <Col md={6} lg={4}>
+                        <img className="w-100 h-auto gameCard" alt="Call of Duty Black Ops 3" src="http://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg" />
+                    </Col>
+                    <GameCard />
+                </Row> */}
+                <Row>
+                    <Col md={6} lg={4}>
+                        <GameCard name={"Arma 3"} image={"http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg"} />
+                        <GameCard name={"Call of Duty Black Ops 3"} image={"http://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg"} />
+                        <GameCard name={"Payday 2"} image={"http://cdn.akamai.steamstatic.com/steam/apps/218620/header.jpg"} />
+                    </Col>
+                    <Col md={6} lg={4}>
+                        <GameCard name={"Call of Duty Black Ops 3"} image={"http://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg"} />
+                        <GameCard name={"Payday 2"} image={"http://cdn.akamai.steamstatic.com/steam/apps/218620/header.jpg"} />                        
+                        <GameCard name={"Arma 3"} image={"http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg"} />
+                    </Col>
+                    <Col md={6} lg={4}>
+                        <GameCard name={"Payday 2"} image={"http://cdn.akamai.steamstatic.com/steam/apps/218620/header.jpg"} />
+                        <GameCard name={"Arma 3"} image={"http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg"} />
+                        <GameCard name={"Call of Duty Black Ops 3"} image={"http://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg"} />
+                    </Col>
                 </Row>
             </div>
         );
@@ -171,11 +195,11 @@ class GameScreen extends React.Component {
 function GameCard(props) {
     const [open, setOpen] = useState(false);
     return(
-        <Col md={6} lg={4} onClick={() => setOpen(!open)}>
+        <Col md={12} lg={12} className="p-0 mb-4" onClick={() => setOpen(!open)}>
             <div className="position-relative">
-                <img className="w-100 h-auto gameCard" alt="Payday 2" src="http://cdn.akamai.steamstatic.com/steam/apps/218620/header.jpg" />
+                <img className="w-100 h-auto gameCard" alt={props.name} src={props.image} />
                 <div class="middleTop">
-                    <div class="text">Payday 2</div>
+                    <div class="text">{props.name}</div>
                 </div>
                 <div class="middleBottom">
                     <div class="text underline">More Info</div>
