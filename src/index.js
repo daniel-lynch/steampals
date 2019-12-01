@@ -154,37 +154,21 @@ class GameScreen extends React.Component {
         return(
             <div>
                 <h1 className="compGameText">Comparing with: Sharpyaddict</h1>
-                {/* <Row>
-                    <Col md={6} lg={4}>
-                        <img className="w-100 h-auto gameCard" alt="Arma 3" src="http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg" />
-                    </Col>
-                    <Col md={6} lg={4}>
-                        <img className="w-100 h-auto gameCard" alt="Call of Duty Black Ops 3" src="http://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg" />
-                    </Col>
-                    <GameCard />
-                    <Col md={6} lg={4}>
-                        <img className="w-100 h-auto gameCard" alt="Arma 3" src="http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg" />
-                    </Col>
-                    <Col md={6} lg={4}>
-                        <img className="w-100 h-auto gameCard" alt="Call of Duty Black Ops 3" src="http://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg" />
-                    </Col>
-                    <GameCard />
-                </Row> */}
                 <Row>
                     <Col md={6} lg={4}>
-                        <GameCard name={"Arma 3"} image={"http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg"} />
-                        <GameCard name={"Call of Duty Black Ops 3"} image={"http://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg"} />
-                        <GameCard name={"Payday 2"} image={"http://cdn.akamai.steamstatic.com/steam/apps/218620/header.jpg"} />
+                        <GameCard name={"Arma 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/107410/header.jpg"} info={"Some info here"} />
+                        <GameCard name={"Call of Duty Black Ops 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/311210/header.jpg"} info={"Some info here"} />
+                        <GameCard name={"Payday 2"} image={"https://steamcdn-a.akamaihd.net/steam/apps/218620/header.jpg"} info={"Some info here"} />
                     </Col>
                     <Col md={6} lg={4}>
-                        <GameCard name={"Call of Duty Black Ops 3"} image={"http://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg"} />
-                        <GameCard name={"Payday 2"} image={"http://cdn.akamai.steamstatic.com/steam/apps/218620/header.jpg"} />                        
-                        <GameCard name={"Arma 3"} image={"http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg"} />
+                        <GameCard name={"Call of Duty Black Ops 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/311210/header.jpg"} info={["Call of Duty\u00ae: Black Ops III Zombies Chronicles Edition includes the full base game plus the Zombies Chronicles content expansion.", <br />, "Genre: Action", <br />, "Multiplayer: Yes", <br />, <a href="https://store.steampowered.com/app/311210/">Store Link</a>]} />
+                        <GameCard name={"Payday 2"} image={"https://steamcdn-a.akamaihd.net/steam/apps/218620/header.jpg"} info={"Some info here"} />
+                        <GameCard name={"Arma 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/107410/header.jpg"} info={"Some info here"} />
                     </Col>
                     <Col md={6} lg={4}>
-                        <GameCard name={"Payday 2"} image={"http://cdn.akamai.steamstatic.com/steam/apps/218620/header.jpg"} />
-                        <GameCard name={"Arma 3"} image={"http://cdn.akamai.steamstatic.com/steam/apps/107410/header.jpg"} />
-                        <GameCard name={"Call of Duty Black Ops 3"} image={"http://cdn.akamai.steamstatic.com/steam/apps/311210/header.jpg"} />
+                        <GameCard name={"Payday 2"} image={"https://steamcdn-a.akamaihd.net/steam/apps/218620/header.jpg"} info={"Some info here"} />
+                        <GameCard name={"Arma 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/107410/header.jpg"} info={"Some info here"} />
+                        <GameCard name={"Call of Duty Black Ops 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/311210/header.jpg"} info={"Some info here"} />
                     </Col>
                 </Row>
             </div>
@@ -208,18 +192,12 @@ function GameCard(props) {
             </div>
             <Collapse in={open}>
                 <div className="gameInfo">
-                <p>
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-                    terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-                    labore wes anderson cred nesciunt sapiente ea proident.
-                </p>
+                    <p className="pl-3 pt-2 pb-4">{props.info}</p>
                 </div>
             </Collapse>
         </Col>
     )
 }
-
-// TODO make friends nav component
 
 // const App = () => (
 //     <Container>
