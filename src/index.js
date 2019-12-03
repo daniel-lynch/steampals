@@ -161,7 +161,7 @@ class GameScreen extends React.Component {
                         <GameCard name={"Payday 2"} image={"https://steamcdn-a.akamaihd.net/steam/apps/218620/header.jpg"} info={"Some info here"} />
                     </Col>
                     <Col md={6} lg={4}>
-                        <GameCard name={"Call of Duty Black Ops 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/311210/header.jpg"} info={["Call of Duty\u00ae: Black Ops III Zombies Chronicles Edition includes the full base game plus the Zombies Chronicles content expansion.", <br />, "Genre: Action", <br />, "Multiplayer: Yes", <br />, <a href="https://store.steampowered.com/app/311210/">Store Link</a>]} />
+                        <GameCard name={"Call of Duty Black Ops 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/311210/header.jpg"} info={["Call of Duty\u00ae: Black Ops III Zombies Chronicles Edition includes the full base game plus the Zombies Chronicles content expansion.", <br />, "Genre: Action", <br />, "Multiplayer: Yes", <br />, <Button className={"steamTags"}>Multiplayer</Button>, <Button className={"steamTags"}>FPS</Button>, <Button className={"steamTags"}>Zombies</Button>, <br />, <a href="https://store.steampowered.com/app/311210/">Store Link</a>]} />
                         <GameCard name={"Payday 2"} image={"https://steamcdn-a.akamaihd.net/steam/apps/218620/header.jpg"} info={"Some info here"} />
                         <GameCard name={"Arma 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/107410/header.jpg"} info={"Some info here"} />
                     </Col>

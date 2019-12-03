@@ -75,6 +75,14 @@ p {
     border-style: solid; */
 }
 
+.steamTags {
+    background-color: #293d4b;
+    color: #7cc0f0;
+    border: 0;
+    padding: 2px 8px 2px 8px;
+    margin-right: 4px;
+}
+
 /* Navbar stuff */
 
 .navbar {
