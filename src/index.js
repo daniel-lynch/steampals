@@ -148,11 +148,31 @@ class Board extends React.Component {
 class GameScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            contacts: []
+        }
     }
+    
+
+    componentDidMount() {
+        fetch('http://jsonplaceholder.typicode.com/users')
+        .then(res => res.json())
+        .then((data) => {
+          console.log(data)
+          this.setState({ contacts: data })
+        })
+        .catch(console.log)
+    }
+
     render() {
         return(
             <div>
+                {/* {this.state.contacts} */}
+                <ul>
+                    {this.state.contacts.map(function(listValue){
+                        return <li>{listValue.name}</li>;
+                    })}
+                </ul>
                 <h1 className="compGameText">Comparing with: Sharpyaddict</h1>
                 <Row>
                     <Col md={6} lg={4}>
@@ -192,7 +212,7 @@ function GameCard(props) {
             </div>
             <Collapse in={open}>
                 <div className="gameInfo">
-                    <p className="pl-3 pt-2 pb-4">{props.info}</p>
+                    <p className="pl-3 pt-2 pb-3">{props.info}</p>
                 </div>
             </Collapse>
         </Col>
