@@ -155,7 +155,7 @@ class GameScreen extends React.Component {
     
 
     componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/users')
+        fetch('https://stageapi.steampals.io/posts')
         .then(res => res.json())
         .then((data) => {
           console.log(data)
