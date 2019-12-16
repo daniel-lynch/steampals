@@ -1,0 +1,15 @@
+{
+    "posts": [
+        {
+            "name": "Call of Duty Black Ops 3",
+            "image": "https://steamcdn-a.akamaihd.net/steam/apps/311210/header.jpg",
+            "info": {
+                "shortdesc": "Call of Duty\u00ae: Black Ops III Zombies Chronicles Edition includes the full base game plus the Zombies Chronicles content expansion.",
+                "genre": "Action",
+                "multiplayer": "Yes",
+                "tags": ["Multiplayer", "FPS", "Zombies"],
+                "storelink": "https://store.steampowered.com/app/311210/"
+            }
+        }
+    ]
+}
