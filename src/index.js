@@ -149,7 +149,9 @@ class GameScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            contacts: []
+            gamesColum1: [],
+            gamesColum2: [],
+            gamesColum3: []
         }
     }
     
@@ -158,8 +160,36 @@ class GameScreen extends React.Component {
         fetch('https://stageapi.steampals.io/posts')
         .then(res => res.json())
         .then((data) => {
-          console.log(data)
-          this.setState({ contacts: data })
+          let loop = 1,
+              gamesColum1 = [],
+              gamesColum2 = [],
+              gamesColum3 = []
+          for (let game of data){
+
+            switch(loop){
+                case 1:
+                    gamesColum1.push(game);
+                    break;
+                case 2:
+                    gamesColum2.push(game);
+                    break;
+                case 3:
+                    gamesColum3.push(game);
+                    break;
+            }
+
+            loop += 1;
+
+            if (loop === 4){
+                loop = 1;
+            }
+
+          }
+          this.setState({ 
+              gamesColum1: gamesColum1,
+              gamesColum2: gamesColum2,
+              gamesColum3: gamesColum3
+             })
         })
         .catch(console.log)
     }
@@ -167,28 +197,22 @@ class GameScreen extends React.Component {
     render() {
         return(
             <div>
-                {/* {this.state.contacts} */}
-                <ul>
-                    {this.state.contacts.map(function(listValue){
-                        return <li>{listValue.name}</li>;
-                    })}
-                </ul>
                 <h1 className="compGameText">Comparing with: Sharpyaddict</h1>
                 <Row>
                     <Col md={6} lg={4}>
-                        <GameCard name={"Arma 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/107410/header.jpg"} info={"Some info here"} />
-                        <GameCard name={"Call of Duty Black Ops 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/311210/header.jpg"} info={"Some info here"} />
-                        <GameCard name={"Payday 2"} image={"https://steamcdn-a.akamaihd.net/steam/apps/218620/header.jpg"} info={"Some info here"} />
+                        {this.state.gamesColum1.map(function(card){
+                            return <GameCard {...card} key={card.name} />;
+                        })}
                     </Col>
                     <Col md={6} lg={4}>
-                        <GameCard name={"Call of Duty Black Ops 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/311210/header.jpg"} info={["Call of Duty\u00ae: Black Ops III Zombies Chronicles Edition includes the full base game plus the Zombies Chronicles content expansion.", <br />, "Genre: Action", <br />, "Multiplayer: Yes", <br />, <Button className={"steamTags"}>Multiplayer</Button>, <Button className={"steamTags"}>FPS</Button>, <Button className={"steamTags"}>Zombies</Button>, <br />, <a href="https://store.steampowered.com/app/311210/">Store Link</a>]} />
-                        <GameCard name={"Payday 2"} image={"https://steamcdn-a.akamaihd.net/steam/apps/218620/header.jpg"} info={"Some info here"} />
-                        <GameCard name={"Arma 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/107410/header.jpg"} info={"Some info here"} />
+                        {this.state.gamesColum2.map(function(card){
+                            return <GameCard {...card} key={card.name} />;
+                        })}
                     </Col>
                     <Col md={6} lg={4}>
-                        <GameCard name={"Payday 2"} image={"https://steamcdn-a.akamaihd.net/steam/apps/218620/header.jpg"} info={"Some info here"} />
-                        <GameCard name={"Arma 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/107410/header.jpg"} info={"Some info here"} />
-                        <GameCard name={"Call of Duty Black Ops 3"} image={"https://steamcdn-a.akamaihd.net/steam/apps/311210/header.jpg"} info={"Some info here"} />
+                        {this.state.gamesColum3.map(function(card){
+                            return <GameCard {...card} key={card.name} />;
+                        })}
                     </Col>
                 </Row>
             </div>
@@ -202,17 +226,29 @@ function GameCard(props) {
         <Col md={12} lg={12} className="p-0 mb-4" onClick={() => setOpen(!open)}>
             <div className="position-relative">
                 <img className="w-100 h-auto gameCard" alt={props.name} src={props.image} />
-                <div class="middleTop">
-                    <div class="text">{props.name}</div>
+                <div className="middleTop">
+                    <div className="text">{props.name}</div>
                 </div>
-                <div class="middleBottom">
-                    <div class="text underline">More Info</div>
-                    <div class="text"><FontAwesomeIcon icon={faCaretDown} /></div>
+                <div className="middleBottom">
+                    <div className="text underline">More Info</div>
+                    <div className="text"><FontAwesomeIcon icon={faCaretDown} /></div>
                 </div>
             </div>
             <Collapse in={open}>
                 <div className="gameInfo">
-                    <p className="pl-3 pt-2 pb-3">{props.info}</p>
+                <p className="pl-3 pt-2 pb-3">
+                    {props.info.shortdesc}
+                    <br />
+                    Genre: {props.info.genre}
+                    <br />
+                    Multiplayer: {props.info.multiplayer}
+                    <br />
+                    {props.info.tags.map(function(tag){
+                        return <Button className={"steamTags"} key={tag}>{tag}</Button>
+                    })}
+                    <br />
+                    <a href={props.info.storelink}>Store Link</a>
+                </p>
                 </div>
             </Collapse>
         </Col>
