@@ -54,7 +54,8 @@ p {
 }
 
 /* Game stuff */
-.col-md-12:hover .gameCard {
+.col-md-12 .position-relative:hover .gameCard {
+    cursor: pointer;
     filter: url("data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\'&gt;&lt;filter id=\'grayscale\'&gt;&lt;feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale"); /* Firefox 10+, Firefox on Android */
     filter: gray; /* IE6-9 */
     -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
@@ -133,8 +134,9 @@ p {
     text-align: center;
 }  
 
-.col-md-12:hover:hover .middleTop, .col-md-12:hover .middleBottom {
+.col-md-12:hover .position-relative:hover .middleTop, .col-md-12 .position-relative:hover .middleBottom {
     opacity: 1;
+    cursor: pointer;
 }
 
 .text {
