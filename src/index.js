@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from "react-bootstrap/Container";
@@ -8,9 +8,7 @@ import ProfileCard from './componets/ProfileCard';
 import Nav from './componets/Nav';
 import Button from 'react-bootstrap/Button';
 import SearchBar from './componets/SearchBar';
-import Collapse from 'react-bootstrap/Collapse'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import GameCard from "./componets/GameCard"
 import './index.css';
 
 class Board extends React.Component {
@@ -176,6 +174,8 @@ class GameScreen extends React.Component {
                 case 3:
                     gamesColum3.push(game);
                     break;
+                default:
+                    break;
             }
 
             loop += 1;
@@ -185,7 +185,7 @@ class GameScreen extends React.Component {
             }
 
           }
-          this.setState({ 
+          this.setState({
               gamesColum1: gamesColum1,
               gamesColum2: gamesColum2,
               gamesColum3: gamesColum3
@@ -218,41 +218,6 @@ class GameScreen extends React.Component {
             </div>
         );
     }
-}
-
-function GameCard(props) {
-    const [open, setOpen] = useState(false);
-    return(
-        <Col md={12} lg={12} className="p-0 mb-4 gameCol">
-            <div className="position-relative" onClick={() => setOpen(!open)}>
-                <img className="w-100 h-auto gameCard" alt={props.name} src={props.image} />
-                <div className="middleTop">
-                    <div className="text">{props.name}</div>
-                </div>
-                <div className="middleBottom">
-                    <div className="text underline">More Info</div>
-                    <div className="text"><FontAwesomeIcon icon={faCaretDown} /></div>
-                </div>
-            </div>
-            <Collapse in={open}>
-                <div className="gameInfo">
-                <p className="pl-3 pt-2 pb-3">
-                    {props.info.shortdesc}
-                    <br />
-                    Genre: {props.info.genre}
-                    <br />
-                    Multiplayer: {props.info.multiplayer}
-                    <br />
-                    {props.info.tags.map(function(tag){
-                        return <Button className={"steamTags"} key={tag}>{tag}</Button>
-                    })}
-                    <br />
-                    <a href={props.info.storelink}>Store Link</a>
-                </p>
-                </div>
-            </Collapse>
-        </Col>
-    )
 }
 
 // const App = () => (
