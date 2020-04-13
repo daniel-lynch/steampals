@@ -10,6 +10,13 @@ import Button from 'react-bootstrap/Button';
 import SearchBar from './componets/SearchBar';
 import GameCard from "./componets/GameCard"
 import './index.css';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect,
+    Link
+  } from "react-router-dom";
 
 class Board extends React.Component {
 
@@ -135,7 +142,7 @@ class Board extends React.Component {
                     <SearchBar filterText={this.state.filterText} onFilterTextChange={this.handleFilterTextChange} />
                 </Col>
                 <Col md={4}>
-                    <Button variant="success" className="w-100">Compare with Friends!</Button>
+                <Link to="/gamescreen"><Button variant="success" className="w-100">Compare with Friends!</Button></Link>
                 </Col>
                 {rows}
             </Row>
@@ -220,19 +227,32 @@ class GameScreen extends React.Component {
     }
 }
 
-// const App = () => (
-//     <Container>
-//         <Nav />
-//         <Board />
-//     </Container>
-//   );
-
-const App = () => (
-    <Container>
-        <Nav />
-        <GameScreen />
-    </Container>
-);
+export default function App() {
+    return (
+        <Router>
+            <Switch>
+                <Route path="/compare">
+                    <Container>
+                        <Nav />
+                        <Board />
+                    </Container>
+                </Route>
+                <Route path="/gamescreen">
+                    <Container>
+                        <Nav />
+                        <GameScreen />
+                    </Container>
+                </Route>
+                <Route path="/">
+                    <Redirect to={{
+                        pathname: "/compare"
+                        }} 
+                    />
+                </Route>
+            </Switch>
+        </Router>
+    )
+};
 
 // ========================================
 

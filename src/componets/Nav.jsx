@@ -4,13 +4,16 @@ import Nav from "react-bootstrap/Nav"
 import NavDropdown from "react-bootstrap/NavDropdown"
 import Navbar from "react-bootstrap/Navbar";
 import '../index.css';
+import {
+    Link
+  } from "react-router-dom";
 
 
 class Navigation extends Component {
     render(){
         return (
             <Navbar bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand>SteamPals.io</Navbar.Brand>
+                <Link to="/compare"><Navbar.Brand>SteamPals.io</Navbar.Brand></Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
