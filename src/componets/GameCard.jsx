@@ -11,7 +11,7 @@ import '../index.css';
 function GameCard(props) {
     const [open, setOpen] = useState(false);
     return(
-        <Col md={12} lg={12} className="p-0 mb-4">
+        <Col md={12} lg={12} className="p-0 mb-4 gameInfo">
             <div className="position-relative" onClick={() => setOpen(!open)}>
                 <img className="w-100 h-auto gameCard" alt={props.name} src={props.image} />
                 <div className="middleTop">
