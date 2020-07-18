@@ -21,7 +21,7 @@
     "express-session": "^1.15.6",
     "grunt": "^1.0.4",
     "keygrip": "^1.1.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "openid-client": "^2.4.5",
     "passport": "^0.4.0",
     "passport-openid": "^0.4.0",
