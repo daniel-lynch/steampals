@@ -9,6 +9,7 @@ import Nav from './componets/Nav';
 import Button from 'react-bootstrap/Button';
 import SearchBar from './componets/SearchBar';
 import GameCard from "./componets/GameCard"
+import Login from "./componets/Login"
 import './index.css';
 import {
     BrowserRouter as Router,
@@ -242,6 +243,9 @@ export default function App() {
                         <Nav />
                         <GameScreen />
                     </Container>
+                </Route>
+                <Route path="/login">
+                    <Login />
                 </Route>
                 <Route path="/">
                     <Redirect to={{
