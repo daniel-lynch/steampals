@@ -1,3 +1,1 @@
-node_modules/
-config/env/steamCredentials.js
-.env
+client/node_modules

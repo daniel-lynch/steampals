@@ -1,0 +1,12 @@
+/*Game Object for Card*/
+{
+    "name": "", // String
+    "image": "", // String
+    "info": {
+        "shortdesc": "", // String
+        "genre": "", // String
+        "multiplayer": "", // Yes or No
+        "tags": [], // Array of Strings, Probably limit to 3 or 4 steam tags
+        "storelink": "" // String, link
+    }
+}
