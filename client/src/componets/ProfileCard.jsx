@@ -19,14 +19,14 @@ class ProfileCard extends Component {
     render(){
         let {pic, type, name, status, card} = this.props.options;
         return (
-            <Col md={4} style={{marginTop: '20px'}}>
+            <Col md={6} lg={4} style={{marginTop: '20px'}}>
                 <Card className={card} onClick={this.handleFriendSelect}>
                     <Card.Body>
                         <Row>
-                            <Col xs="auto"><img alt="" src={pic} /></Col>
-                            <Col xs="auto">
+                            <Col xs="2" md="3" lg="3"><img alt="" src={pic} /></Col>
+                            <Col className={`friendStatus`} xs="10" md="9" lg="9">
                                 <p className={`${type} friendName`}>{name}</p>
-                                <p className={type}>{status}</p>
+                                <p className={`${type} friendStatus`}>{status}</p>
                             </Col>
                         </Row>
                     </Card.Body>

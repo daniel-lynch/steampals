@@ -18,11 +18,11 @@ class Navigation extends Component {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link className="active" href="/compare">Compare</Nav.Link>
-                        <Nav.Link href="/github">Github</Nav.Link>
+                        <Nav.Link href="https://github.com/daniel-lynch/steampals">Github</Nav.Link>
                     </Nav>
                     <Nav>
-                        <NavDropdown title="ProfileName" id="collasible-nav-dropdown">
-                            <NavDropdown.Item href="/auth/logout">Logout</NavDropdown.Item>
+                        <NavDropdown title={this.props.name} id="collasible-nav-dropdown">
+                            <NavDropdown.Item href="http://api.steampals.io/auth/logout">Logout</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

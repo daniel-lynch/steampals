@@ -1,9 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../cover.css'
+import '../cover.css';
 
 function Login() {
     // Converted from Master branch
+    document.body.style.height = "100vh";
     return (
         <div className="text-center cover-container d-flex h-100 p-3 mx-auto flex-column">
           <header className="masthead mb-auto">
@@ -21,7 +22,7 @@ function Login() {
             <p className="lead">
             </p>
             <br />
-            <form id="signinForm" action="/auth/openid" method="post">
+            <form id="signinForm" action="http://api.steampals.io/auth/openid" method="post">
               <input name="submit" type="image" height="35px" src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png" alt="Sign in through Steam" />
             </form>
             <p />
