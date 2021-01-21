@@ -10,6 +10,7 @@ import requests
 import json
 import os
 from urllib import parse
+from waitress import serve
 
 
 """
@@ -249,8 +250,8 @@ def steam():
         'openid.identity': "http://specs.openid.net/auth/2.0/identifier_select",
         'openid.claimed_id': "http://specs.openid.net/auth/2.0/identifier_select",
         'openid.mode': 'checkid_setup',
-        'openid.return_to': 'http://localhost:5000/auth/openid/return', # put your url where you want to be redirect
-        'openid.realm': 'http://localhost:5000/'
+        'openid.return_to': 'https://api.steampals.io/auth/openid/return', # put your url where you want to be redirect
+        'openid.realm': 'https://api.steampals.io/'
     }
     param_string = parse.urlencode(params)
     auth_url = steam_openid_url + "?" + param_string
@@ -260,7 +261,7 @@ def steam():
 def logout():
     del session['steamid']
     del session['name']
-    return redirect('http://localhost:3000/login')
+    return redirect('https://steampals.io/login')
 
 @app.route('/auth/openid/return', methods=['GET'])
 def auth():
@@ -273,7 +274,7 @@ def auth():
         url = f"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={steamKey}&steamids={steamid}"
         requestobj = requests.get(url).json()
         session['name'] = requestobj["response"]["players"][0]["personaname"]
-        return(redirect("http://localhost:3000/compare"))
+        return(redirect("https://steampals.io/compare"))
 
 if __name__ == "__main__":
-    app.run()
+    serve(app, host='0.0.0.0', port=5000)

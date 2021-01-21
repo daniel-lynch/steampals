@@ -14,7 +14,7 @@ export default (ChildComponent) => {
         // fires immediately after the initial render
         componentDidMount() {
             console.log("componentDidMount()");
-            fetch('http://localhost:5000/auth/isloggedin', {credentials: 'include'})
+            fetch('https://api.steampals.io/auth/isloggedin', {credentials: 'include'})
             .then(res => res.json())
             .then((data) => {
                 console.log(data.isloggedin)

@@ -22,7 +22,7 @@ class Navigation extends Component {
                     </Nav>
                     <Nav>
                         <NavDropdown title={this.props.name} id="collasible-nav-dropdown">
-                            <NavDropdown.Item href="http://api.steampals.io/auth/logout">Logout</NavDropdown.Item>
+                            <NavDropdown.Item href="https://api.steampals.io/auth/logout">Logout</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

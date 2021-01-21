@@ -60,7 +60,7 @@ class Board extends React.Component {
             friends.push(this.state.friends[friend -1])
         }
 
-        fetch('http://api.steampals.io/api/v1/comparegames', {method: 'POST', credentials: 'include', body: JSON.stringify(friends), headers: {'Content-Type': 'application/json'}})
+        fetch('https://api.steampals.io/api/v1/comparegames', {method: 'POST', credentials: 'include', body: JSON.stringify(friends), headers: {'Content-Type': 'application/json'}})
         .then(res => res.json())
         .then((data) => {
             games = data
@@ -73,7 +73,7 @@ class Board extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://api.steampals.io/api/v1/getfriends', {credentials: 'include'})
+        fetch('https://api.steampals.io/api/v1/getfriends', {credentials: 'include'})
         .then(res => res.json())
         .then((data) => {
             console.log(data)

@@ -22,7 +22,7 @@ function Login() {
             <p className="lead">
             </p>
             <br />
-            <form id="signinForm" action="http://api.steampals.io/auth/openid" method="post">
+            <form id="signinForm" action="https://api.steampals.io/auth/openid" method="post">
               <input name="submit" type="image" height="35px" src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png" alt="Sign in through Steam" />
             </form>
             <p />
