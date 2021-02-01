@@ -34,7 +34,7 @@ cursor = db.cursor()
 steamKey = steamkey
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True)
+CORS(app, supports_credentials=True, origins="https://steampals.io")
 app.config.update(
     SECRET_KEY = 'Something very secure.',
     DEBUG = True
