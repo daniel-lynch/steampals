@@ -34,11 +34,11 @@ cursor = db.cursor()
 steamKey = steamkey
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True, origins="https://steampals.io")
 app.config.update(
     SECRET_KEY = 'Something very secure.',
     DEBUG = True
 )
+CORS(app, supports_credentials=True, resources={origins="https://steampals.io"})
 
 def validate(signed_params):
     steam_login_url_base = "https://steamcommunity.com/openid/login"
