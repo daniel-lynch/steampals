@@ -143,15 +143,16 @@ def comparegames():
         gameCounts = {}
 
         userGames = getGames(steamid)
-        userGames = list({v['appid']:v for v in userGames}.values()) # Sort by appid for dupes
-
-        comparedGames.extend(userGames)
+        if userGames:
+          userGames = list({v['appid']:v for v in userGames}.values()) # Sort by appid for dupes
+          comparedGames.extend(userGames)
 
         for friendid in friends:
             friendid = friendid["steamid"]
             friendgames = getGames(friendid)
-            friendgames = list({v['appid']:v for v in friendgames}.values()) # Sort by appid for dupes
-            comparedGames.extend(friendgames)
+            if friendgames:
+              friendgames = list({v['appid']:v for v in friendgames}.values()) # Sort by appid for dupes
+              comparedGames.extend(friendgames)
 
         for game in comparedGames:
             if game["appid"] in gameCounts:
