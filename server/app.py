@@ -22,8 +22,14 @@ database = os.environ.get('database')
 dbuser = os.environ.get('dbuser')
 dbpassword = os.environ.get('dbpassword')
 steamkey = os.environ.get('steamkey')
+secret_key = os.environ.get('secret_key')
+siteurl = os.environ.get('siteurl')
+apiurl = os.environ.get('apiurl')
 
 db = mysql.connector.connect(
+  pool_name = "mypool",
+  pool_size = 10,
+  pool_reset_session=True,
   host=dbhost,
   database=database,
   user=dbuser,
@@ -35,10 +41,10 @@ steamKey = steamkey
 
 app = Flask(__name__)
 app.config.update(
-    SECRET_KEY = 'Something very secure.',
+    SECRET_KEY = secret_key,
     DEBUG = True
 )
-CORS(app, supports_credentials=True, origins="https://steampals.io")
+CORS(app, supports_credentials=True, origins=siteurl)
 
 def validate(signed_params):
     steam_login_url_base = "https://steamcommunity.com/openid/login"
@@ -251,8 +257,8 @@ def steam():
         'openid.identity': "http://specs.openid.net/auth/2.0/identifier_select",
         'openid.claimed_id': "http://specs.openid.net/auth/2.0/identifier_select",
         'openid.mode': 'checkid_setup',
-        'openid.return_to': 'https://api.steampals.io/auth/openid/return', # put your url where you want to be redirect
-        'openid.realm': 'https://api.steampals.io/'
+        'openid.return_to': f"{apiurl}/auth/openid/return", # put your url where you want to be redirect
+        'openid.realm': apiurl
     }
     param_string = parse.urlencode(params)
     auth_url = steam_openid_url + "?" + param_string
@@ -262,7 +268,7 @@ def steam():
 def logout():
     del session['steamid']
     del session['name']
-    return redirect('https://steampals.io/login')
+    return redirect(f"{siteurl}/login")
 
 @app.route('/auth/openid/return', methods=['GET'])
 def auth():
@@ -275,7 +281,7 @@ def auth():
         url = f"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={steamKey}&steamids={steamid}"
         requestobj = requests.get(url).json()
         session['name'] = requestobj["response"]["players"][0]["personaname"]
-        return(redirect("https://steampals.io/compare"))
+        return(redirect(f"{siteurl}/compare"))
 
 if __name__ == "__main__":
     serve(app, host='0.0.0.0', port=5000)
