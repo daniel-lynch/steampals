@@ -8,6 +8,9 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+#root {
+    min-width: 100vw;
+}
 
 p {
     font-size: 22px;
