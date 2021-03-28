@@ -37,6 +37,8 @@ db = mysql.connector.connect(
 )
 cursor = db.cursor()
 
+db.ping(True)
+
 steamKey = steamkey
 
 app = Flask(__name__)
