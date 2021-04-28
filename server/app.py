@@ -5,13 +5,13 @@ from flask_cors import CORS, cross_origin
 from flask_openid import OpenID
 from urllib import parse
 import re
-import mysql.connector
 import requests
 import json
 import os
 from urllib import parse
 from waitress import serve
-
+from mysql.connector import pooling
+from mysql.connector import Error
 
 """
 Pipe in enviornment varibles
@@ -26,18 +26,39 @@ secret_key = os.environ.get('secret_key')
 siteurl = os.environ.get('siteurl')
 apiurl = os.environ.get('apiurl')
 
-db = mysql.connector.connect(
-  pool_name = "mypool",
-  pool_size = 10,
-  pool_reset_session=True,
-  host=dbhost,
-  database=database,
-  user=dbuser,
-  password=dbpassword
-)
-cursor = db.cursor()
+"""
+MySQL Pooling Setup
+"""
 
-db.ping(True)
+try:
+    connection_pool = pooling.MySQLConnectionPool(pool_name="connection_pool",
+                                                  pool_size=10,
+                                                  pool_reset_session=True,
+                                                  host=dbhost,
+                                                  database=database,
+                                                  user=dbuser,
+                                                  password=dbpassword)
+
+    # Get connection object from a pool
+    connection_object = connection_pool.get_connection()
+
+    if connection_object.is_connected():
+        db_Info = connection_object.get_server_info()
+        print("Connected to MySQL database using connection pool ... MySQL Server version on ", db_Info)
+
+        cursor = connection_object.cursor()
+        cursor.execute("select database();")
+        record = cursor.fetchone()
+        print("Your connected to - ", record)
+
+except Error as e:
+    print("Error while connecting to MySQL using Connection pool ", e)
+finally:
+    # closing database connection.
+    if connection_object.is_connected():
+        cursor.close()
+        connection_object.close()
+        print("MySQL connection is closed")
 
 steamKey = steamkey
 
@@ -47,6 +68,36 @@ app.config.update(
     DEBUG = True
 )
 CORS(app, supports_credentials=True, origins=siteurl)
+
+def _query(query, args=None, commit=False):
+    try:
+        # Get connection object from a pool
+        connection_object = connection_pool.get_connection()
+
+        if connection_object.is_connected():
+            cursor = connection_object.cursor()
+
+            if args:
+                cursor.execute(query, args)
+            else:
+                cursor.execute(query)
+
+            if commit is True:
+                connection_object.commit()
+                return True
+            else:
+                cursor.execute(query)
+                record = cursor.fetchone()
+                return(True, record)
+
+    except Error as e:
+        print("Error while connecting to MySQL using Connection pool ", e)
+        return(False, e)
+    finally:
+        # closing database connection.
+        if connection_object.is_connected():
+            cursor.close()
+            connection_object.close()
 
 def validate(signed_params):
     steam_login_url_base = "https://steamcommunity.com/openid/login"
@@ -133,11 +184,11 @@ def getGames(steamId):
 def insertGame(appid, name, description, tags, multiplayer, blacklist=0):
     if tags:
         tags = ",".join(tags)
+
     sql = "INSERT INTO games (id, name, description, tags, multiplayer, blacklist) VALUES (%s, %s, %s, %s, %s, %s)"
     val = (appid, name, description, tags, multiplayer, blacklist)
-    cursor.execute(sql, val)
-    db.commit()
-    return(cursor.rowcount)
+
+    return(_query(sql, args=val, commit=True))
 
 @app.route('/api/v1/comparegames', methods=['POST'])
 def comparegames():
@@ -174,10 +225,9 @@ def comparegames():
                 appid = gameobj['appid']
                 
                 query = f"SELECT * FROM games WHERE id={appid};"
-                cursor.execute(query)
-                gamedata = cursor.fetchone()
+                status, gamedata = _query(query)
                 
-                if gamedata:
+                if status and gamedata:
                     if gamedata[5]:
                         continue
                     tags = gamedata[3].split(",")
