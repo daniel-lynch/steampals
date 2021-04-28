@@ -58,7 +58,6 @@ finally:
     if connection_object.is_connected():
         cursor.close()
         connection_object.close()
-        print("MySQL connection is closed")
 
 steamKey = steamkey
 
@@ -79,10 +78,8 @@ def _query(query, args=None, commit=False):
 
             if args:
                 cursor.execute(query, args)
-            else:
-                cursor.execute(query)
 
-            if commit is True:
+            if commit:
                 connection_object.commit()
                 return True
             else:
