@@ -59,8 +59,6 @@ finally:
         cursor.close()
         connection_object.close()
 
-steamKey = steamkey
-
 app = Flask(__name__)
 app.config.update(
     SECRET_KEY = secret_key,
@@ -123,12 +121,12 @@ def getfriends():
     if checklogin(session):
         friends = []
         steamid = session['steamid']
-        url = f"http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key={steamKey}&steamid={steamid}&relationship=friend"
+        url = f"http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key={steamkey}&steamid={steamid}&relationship=friend"
         request = requests.get(url).json()
         for friend in request["friendslist"]["friends"]:
             friends.append(friend["steamid"])
         steamids = ",".join(friends)
-        url = f"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={steamKey}&steamids={steamids}"
+        url = f"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={steamkey}&steamids={steamids}"
         friends = []
         request = requests.get(url).json()
         for friend in request["response"]["players"]:
@@ -167,7 +165,7 @@ def getfriends():
         return(jsonify({"isloggedin": "False"}), 401)
 
 def getGames(steamId):
-    gamesList = requests.get(f"http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key={steamKey}&steamid={steamId}&format=json&include_appinfo=1").json()
+    gamesList = requests.get(f"http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key={steamkey}&steamid={steamId}&format=json&include_appinfo=1").json()
 
     if gamesList['response']:
         games = []
@@ -327,7 +325,7 @@ def auth():
         match = steam_id_re.search(request.args['openid.claimed_id'])
         steamid = match.group(1)
         session['steamid'] = steamid
-        url = f"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={steamKey}&steamids={steamid}"
+        url = f"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={steamkey}&steamids={steamid}"
         requestobj = requests.get(url).json()
         session['name'] = requestobj["response"]["players"][0]["personaname"]
         return(redirect(f"{siteurl}/compare"))
