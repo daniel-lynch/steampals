@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Redirect, withRouter} from "react-router-dom";
 
+/* eslint import/no-anonymous-default-export: [2, {"allowArrowFunction": true}] */
 export default (ChildComponent) => {
     class ComposedComponent extends Component {
         constructor(props) {
