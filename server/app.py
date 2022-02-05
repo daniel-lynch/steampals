@@ -260,10 +260,17 @@ def comparegames():
                     except:
                         genre = "Unknown"
 
+                    labels = re.search("<div class=\\\"label\\\">([^<]*)", storepage, re.MULTILINE).groups()
+
                     newgameobj["info"]["multiplayer"] = "No"
                     multiplayer = 0
                     for tag in tags:
                         if tag == "Multiplayer" or tag == "Multi-player":
+                            newgameobj["info"]["multiplayer"] = "Yes"
+                            multiplayer = 1
+
+                    for label in labels:
+                        if "Online" in label:
                             newgameobj["info"]["multiplayer"] = "Yes"
                             multiplayer = 1
 
