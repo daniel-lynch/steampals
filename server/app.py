@@ -253,14 +253,18 @@ def comparegames():
 
                     tags = re.findall("<a[^>]*class=\\\"app_tag\\\"[^>]*>([^<]*)</a>", storepage, re.MULTILINE)
                     tags = [x.strip() for x in tags]
-
-                    description = re.search("<div[^>]* class=\\\"game_description_snippet\\\"[^>]*>([^<]*)</div>", storepage, re.MULTILINE).groups()[0].strip()
+                    try:
+                        description = re.search("<div[^>]* class=\\\"game_description_snippet\\\"[^>]*>([^<]*)</div>", storepage, re.MULTILINE).groups()[0].strip()
+                    except:
+                        description = None
                     try:
                         genre = re.search("<b>Genre:</b>\\s(?:[^>]*>)<a[^>]*>([^<]*)", storepage, re.MULTILINE).groups()[0]
                     except:
                         genre = "Unknown"
-
-                    labels = re.search("<div class=\\\"label\\\">([^<]*)", storepage, re.MULTILINE).groups()
+                    try:
+                        labels = re.search("<div class=\\\"label\\\">([^<]*)", storepage, re.MULTILINE).groups()
+                    except:
+                        labels = None
 
                     newgameobj["info"]["multiplayer"] = "No"
                     multiplayer = 0
@@ -268,11 +272,11 @@ def comparegames():
                         if tag == "Multiplayer" or tag == "Multi-player":
                             newgameobj["info"]["multiplayer"] = "Yes"
                             multiplayer = 1
-
-                    for label in labels:
-                        if "Online" in label:
-                            newgameobj["info"]["multiplayer"] = "Yes"
-                            multiplayer = 1
+                    if labels:
+                        for label in labels:
+                            if "Online" in label:
+                                newgameobj["info"]["multiplayer"] = "Yes"
+                                multiplayer = 1
 
                     newgameobj["info"]["shortdesc"] = description
                     newgameobj["info"]["genre"] = genre
