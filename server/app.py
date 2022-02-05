@@ -256,7 +256,7 @@ def comparegames():
 
                     description = re.search("<div[^>]* class=\\\"game_description_snippet\\\"[^>]*>([^<]*)</div>", storepage, re.MULTILINE).groups()[0].strip()
                     try:
-                        genre = re.search("<div class=\\\"details_block\\\">\\s*<b>Title:</b>[^<]*<br>\\s*<b>Genre:</b>\\s*(<a[^>]*>([^<]+)</a>,?\\s*)+\\s*<br>", storepage, re.MULTILINE).groups()[1]
+                        genre = re.search("<b>Genre:</b>\\s(?:[^>]*>)<a[^>]*>([^<]*)", storepage, re.MULTILINE).groups()[0]
                     except:
                         genre = "Unknown"
 
