@@ -255,8 +255,10 @@ def comparegames():
                     tags = [x.strip() for x in tags]
 
                     description = re.search("<div[^>]* class=\\\"game_description_snippet\\\"[^>]*>([^<]*)</div>", storepage, re.MULTILINE).groups()[0].strip()
-
-                    genre = re.search("<div class=\\\"details_block\\\">\\s*<b>Title:</b>[^<]*<br>\\s*<b>Genre:</b>\\s*(<a[^>]*>([^<]+)</a>,?\\s*)+\\s*<br>", storepage, re.MULTILINE).groups()[1]
+                    try:
+                        genre = re.search("<div class=\\\"details_block\\\">\\s*<b>Title:</b>[^<]*<br>\\s*<b>Genre:</b>\\s*(<a[^>]*>([^<]+)</a>,?\\s*)+\\s*<br>", storepage, re.MULTILINE).groups()[1]
+                    except:
+                        genre = "Unknown"
 
                     newgameobj["info"]["multiplayer"] = "No"
                     multiplayer = 0
