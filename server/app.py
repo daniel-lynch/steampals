@@ -51,6 +51,7 @@ try:
         record = cursor.fetchone()
         print("Your connected to - ", record)
 
+        
 except Error as e:
     print("Error while connecting to MySQL using Connection pool ", e)
 finally:
@@ -74,6 +75,11 @@ def _query(query, args=None, commit=False):
         if connection_object.is_connected():
             cursor = connection_object.cursor()
 
+            # Enforce UTF-8 for the connection.
+            cursor.execute('SET NAMES utf8mb4')
+            cursor.execute("SET CHARACTER SET utf8mb4")
+            cursor.execute("SET character_set_connection=utf8mb4")
+            
             if args:
                 cursor.execute(query, args)
 
