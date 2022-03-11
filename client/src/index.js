@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from "./componets/Login"
-import GameScreen from './componets/GameScreen'
-import Board from './componets/Board.jsx'
+import Login from './componets/Login';
+import GameScreen from './componets/GameScreen';
+import Board from './componets/Board.jsx';
 import './index.css';
 import {
     BrowserRouter as Router,
