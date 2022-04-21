@@ -1,6 +1,6 @@
 # Steampals.io
 ## Steam Library compare tool
-[![Docker Build](https://github.com/daniel-lynch/steampals/actions/workflows/build.yml/badge.svg)](https://github.com/daniel-lynch/steampals/actions/workflows/build.yml)
+[![Docker Build](https://github.com/daniel-lynch/steampals/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/daniel-lynch/steampals/actions/workflows/build.yml)
 
 Don't know what to play with your friends? How about see what games you and all your friends have in common!
 
