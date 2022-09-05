@@ -367,6 +367,7 @@ def auth():
 @app.route('/auth/openid/return/nativedev', methods=['GET'])
 def authdev():
     args = request.args.to_dict()
+    query = request.query_string
     if validate(args):
         steam_id_re = re.compile('steamcommunity.com/openid/id/(.*?)$')
         match = steam_id_re.search(request.args['openid.claimed_id'])
@@ -375,7 +376,7 @@ def authdev():
         url = f"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={steamkey}&steamids={steamid}"
         requestobj = requests.get(url).json()
         session['name'] = requestobj["response"]["players"][0]["personaname"]
-        return(redirect(f"exp://192.168.1.113:19000"))
+        return(redirect(f"exp://192.168.1.113:19000/${query}"))
 
 if __name__ == "__main__":
     serve(app, host='0.0.0.0', port=5000)
