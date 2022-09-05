@@ -330,6 +330,21 @@ def steam():
     auth_url = steam_openid_url + "?" + param_string
     return redirect(auth_url)
 
+@app.route('/auth/openid/nativedev', methods=['GET','POST'])
+def steam():
+    steam_openid_url = 'https://steamcommunity.com/openid/login'
+    params = {
+        'openid.ns': "http://specs.openid.net/auth/2.0",
+        'openid.identity': "http://specs.openid.net/auth/2.0/identifier_select",
+        'openid.claimed_id': "http://specs.openid.net/auth/2.0/identifier_select",
+        'openid.mode': 'checkid_setup',
+        'openid.return_to': f"{apiurl}/auth/openid/return/nativedev", # put your url where you want to be redirect
+        'openid.realm': apiurl
+    }
+    param_string = parse.urlencode(params)
+    auth_url = steam_openid_url + "?" + param_string
+    return redirect(auth_url)
+
 @app.route('/auth/logout', methods=['GET'])
 def logout():
     del session['steamid']
@@ -348,6 +363,19 @@ def auth():
         requestobj = requests.get(url).json()
         session['name'] = requestobj["response"]["players"][0]["personaname"]
         return(redirect(f"{siteurl}/compare"))
+
+@app.route('/auth/openid/return/nativedev', methods=['GET'])
+def auth():
+    args = request.args.to_dict()
+    if validate(args):
+        steam_id_re = re.compile('steamcommunity.com/openid/id/(.*?)$')
+        match = steam_id_re.search(request.args['openid.claimed_id'])
+        steamid = match.group(1)
+        session['steamid'] = steamid
+        url = f"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={steamkey}&steamids={steamid}"
+        requestobj = requests.get(url).json()
+        session['name'] = requestobj["response"]["players"][0]["personaname"]
+        return(redirect(f"exp://192.168.1.113:19000"))
 
 if __name__ == "__main__":
     serve(app, host='0.0.0.0', port=5000)
