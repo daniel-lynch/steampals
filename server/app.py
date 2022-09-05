@@ -339,7 +339,7 @@ def steamdev():
         'openid.claimed_id': "http://specs.openid.net/auth/2.0/identifier_select",
         'openid.mode': 'checkid_setup',
         'openid.return_to': f"exp://192.168.1.113:19000", # put your url where you want to be redirect
-        'openid.realm': apiurl
+        'openid.realm': "exp://192.168.1.113:19000"
     }
     param_string = parse.urlencode(params)
     auth_url = steam_openid_url + "?" + param_string
