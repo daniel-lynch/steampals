@@ -331,7 +331,7 @@ def steam():
     return redirect(auth_url)
 
 @app.route('/auth/openid/nativedev', methods=['GET','POST'])
-def steam():
+def steamdev():
     steam_openid_url = 'https://steamcommunity.com/openid/login'
     params = {
         'openid.ns': "http://specs.openid.net/auth/2.0",
@@ -365,7 +365,7 @@ def auth():
         return(redirect(f"{siteurl}/compare"))
 
 @app.route('/auth/openid/return/nativedev', methods=['GET'])
-def auth():
+def authdev():
     args = request.args.to_dict()
     if validate(args):
         steam_id_re = re.compile('steamcommunity.com/openid/id/(.*?)$')
