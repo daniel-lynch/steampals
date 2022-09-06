@@ -345,6 +345,21 @@ def steamdev():
     auth_url = steam_openid_url + "?" + param_string
     return redirect(auth_url)
 
+@app.route('/auth/openid/native', methods=['GET','POST'])
+def steamnative():
+    steam_openid_url = 'https://steamcommunity.com/openid/login'
+    params = {
+        'openid.ns': "http://specs.openid.net/auth/2.0",
+        'openid.identity': "http://specs.openid.net/auth/2.0/identifier_select",
+        'openid.claimed_id': "http://specs.openid.net/auth/2.0/identifier_select",
+        'openid.mode': 'checkid_setup',
+        'openid.return_to': f"{apiurl}/auth/openid/return/nativedev", # put your url where you want to be redirect
+        'openid.realm': apiurl
+    }
+    param_string = parse.urlencode(params)
+    auth_url = steam_openid_url + "?" + param_string
+    return redirect(auth_url)
+
 @app.route('/auth/logout', methods=['GET'])
 def logout():
     del session['steamid']
@@ -363,6 +378,11 @@ def auth():
         requestobj = requests.get(url).json()
         session['name'] = requestobj["response"]["players"][0]["personaname"]
         return(redirect(f"{siteurl}/compare"))
+
+@app.route('/auth/openid/return/native', methods=['GET'])
+def authnative():
+    query = request.query_string.decode()
+    return(redirect(f"steampals://login/{query}"))
 
 @app.route('/auth/openid/return/nativedev', methods=['GET'])
 def authdev():
