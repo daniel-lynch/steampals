@@ -353,7 +353,7 @@ def steamnative():
         'openid.identity': "http://specs.openid.net/auth/2.0/identifier_select",
         'openid.claimed_id': "http://specs.openid.net/auth/2.0/identifier_select",
         'openid.mode': 'checkid_setup',
-        'openid.return_to': f"{apiurl}/auth/openid/return/nativedev", # put your url where you want to be redirect
+        'openid.return_to': f"{apiurl}/auth/openid/return/native", # put your url where you want to be redirect
         'openid.realm': apiurl
     }
     param_string = parse.urlencode(params)
